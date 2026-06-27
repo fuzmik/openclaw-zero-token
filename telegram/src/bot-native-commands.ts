@@ -26,7 +26,6 @@ import {
 import type {
   ReplyToMode,
   TelegramAccountConfig,
-  TelegramDirectConfig,
   TelegramGroupConfig,
   TelegramTopicConfig,
 } from "openclaw/plugin-sdk/config-runtime";

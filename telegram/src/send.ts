@@ -27,7 +27,7 @@ import { withTelegramApiErrorLogging } from "./api-logging.js";
 import { buildTelegramThreadParams, buildTypingThreadParams } from "./bot/helpers.js";
 import type { TelegramInlineButtons } from "./button-types.js";
 import { splitTelegramCaption } from "./caption.js";
-import { resolveTelegramApiBase, resolveTelegramFetch } from "./fetch.js";
+import { resolveTelegramFetch } from "./fetch.js";
 import { renderTelegramHtmlText, splitTelegramHtmlChunks } from "./format.js";
 import {
   isRecoverableTelegramNetworkError,

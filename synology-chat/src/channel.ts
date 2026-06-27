@@ -61,7 +61,6 @@ type SynologyChannelOutboundContext = {
   accountId?: string | null;
 };
 type SynologyChannelSendTextContext = SynologyChannelOutboundContext & { text: string };
-type SynologyChannelSendMediaContext = SynologyChannelOutboundContext & { mediaUrl: string };
 type SynologySecurityWarningContext = {
   cfg: OpenClawConfig;
   account: ResolvedSynologyChatAccount;

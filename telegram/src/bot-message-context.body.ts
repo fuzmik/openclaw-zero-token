@@ -90,7 +90,7 @@ export async function resolveTelegramInboundBody(params: {
   routeAgentId?: string;
   effectiveGroupAllow: NormalizedAllowFrom;
   effectiveDmAllow: NormalizedAllowFrom;
-  groupConfig?: TelegramGroupConfig | TelegramDirectConfig;
+  groupConfig?: TelegramGroupConfig;
   topicConfig?: TelegramTopicConfig;
   requireMention?: boolean;
   options?: TelegramMessageContextOptions;

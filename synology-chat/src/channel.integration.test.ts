@@ -8,11 +8,6 @@ import {
 } from "./channel.test-mocks.js";
 import { makeFormBody, makeReq, makeRes } from "./test-http-utils.js";
 
-type RegisteredRoute = {
-  path: string;
-  accountId: string;
-  handler: (req: IncomingMessage, res: ServerResponse) => Promise<void>;
-};
 
 let createSynologyChatPlugin: typeof import("./channel.js").createSynologyChatPlugin;
 const freshChannelModulePath: string = "./channel.js?channel-integration-test";

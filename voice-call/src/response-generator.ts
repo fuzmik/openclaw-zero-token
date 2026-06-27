@@ -4,7 +4,6 @@
  */
 
 import crypto from "node:crypto";
-import type { SessionEntry } from "../api.js";
 import type { VoiceCallConfig } from "./config.js";
 import type { CoreAgentDeps, CoreConfig } from "./core-bridge.js";
 

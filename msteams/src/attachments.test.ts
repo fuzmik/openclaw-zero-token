@@ -13,14 +13,14 @@ const createTestUrl = (pathSegment: string) => createUrlForHost(TEST_HOST, pathS
 const SAVED_PNG_PATH = "/tmp/saved.png";
 const SAVED_PDF_PATH = "/tmp/saved.pdf";
 const TEST_URL_IMAGE = createTestUrl("img");
-const TEST_URL_IMAGE_PNG = createTestUrl("img.png");
-const TEST_URL_IMAGE_1_PNG = createTestUrl("1.png");
-const TEST_URL_IMAGE_2_JPG = createTestUrl("2.jpg");
-const TEST_URL_PDF = createTestUrl("x.pdf");
-const TEST_URL_PDF_1 = createTestUrl("1.pdf");
-const TEST_URL_PDF_2 = createTestUrl("2.pdf");
-const TEST_URL_HTML_A = createTestUrl("a.png");
-const TEST_URL_HTML_B = createTestUrl("b.png");
+const _TEST_URL_IMAGE_PNG = createTestUrl("img.png");
+const _TEST_URL_IMAGE_1_PNG = createTestUrl("1.png");
+const _TEST_URL_IMAGE_2_JPG = createTestUrl("2.jpg");
+const _TEST_URL_PDF = createTestUrl("x.pdf");
+const _TEST_URL_PDF_1 = createTestUrl("1.pdf");
+const _TEST_URL_PDF_2 = createTestUrl("2.pdf");
+const _TEST_URL_HTML_A = createTestUrl("a.png");
+const _TEST_URL_HTML_B = createTestUrl("b.png");
 const TEST_URL_INLINE_IMAGE = createTestUrl("inline.png");
 const TEST_URL_DOC_PDF = createTestUrl("doc.pdf");
 const TEST_URL_FILE_DOWNLOAD = createTestUrl("dl");
@@ -150,7 +150,7 @@ const DEFAULT_SHAREPOINT_ALLOW_HOSTS = [GRAPH_HOST, SHAREPOINT_HOST];
 const DEFAULT_SHARE_REFERENCE_URL = createUrlForHost(SHAREPOINT_HOST, "site/file");
 const MEDIA_PLACEHOLDER_IMAGE = "<media:image>";
 const MEDIA_PLACEHOLDER_DOCUMENT = "<media:document>";
-const formatImagePlaceholder = (count: number) =>
+const _formatImagePlaceholder = (count: number) =>
   count > 1 ? `${MEDIA_PLACEHOLDER_IMAGE} (${count} images)` : MEDIA_PLACEHOLDER_IMAGE;
 const formatDocumentPlaceholder = (count: number) =>
   count > 1 ? `${MEDIA_PLACEHOLDER_DOCUMENT} (${count} files)` : MEDIA_PLACEHOLDER_DOCUMENT;
@@ -673,7 +673,7 @@ describe("msteams attachments", () => {
     it("blocks redirects to non-https URLs", async () => {
       const insecureUrl = "http://x/insecure.png";
       const fetchMock = vi.fn(async (input: RequestInfo | URL) => {
-        const url = typeof input === "string" ? input : input.toString();
+        const url = typeof input === "string" ? input : new URL(input instanceof URL ? input.href : String(input)).href;
         if (url === TEST_URL_IMAGE) {
           return createRedirectResponse(insecureUrl);
         }
@@ -705,7 +705,7 @@ describe("msteams attachments", () => {
       const seen: Array<{ url: string; auth: string }> = [];
       const referenceAttachment = createReferenceAttachment();
       const fetchMock = vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
-        const url = String(input);
+        const url = typeof input === "string" ? input : (input instanceof URL ? input.href : String(input));
         const auth = new Headers(init?.headers).get("Authorization") ?? "";
         seen.push({ url, auth });
 

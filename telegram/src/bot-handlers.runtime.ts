@@ -21,7 +21,6 @@ import {
 } from "openclaw/plugin-sdk/config-runtime";
 import type { DmPolicy } from "openclaw/plugin-sdk/config-runtime";
 import type {
-  TelegramDirectConfig,
   TelegramGroupConfig,
   TelegramTopicConfig,
 } from "openclaw/plugin-sdk/config-runtime";

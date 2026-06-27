@@ -167,7 +167,7 @@ export async function fetchChatUsers(
     const transport = parsedUrl.protocol === "https:" ? https : http;
 
     transport
-      .get(listUrl, { rejectUnauthorized: !allowInsecureSsl } as any, (res) => {
+      .get(listUrl, { rejectUnauthorized: !allowInsecureSsl } as unknown, (res) => {
         let data = "";
         res.on("data", (c: Buffer) => {
           data += c.toString();

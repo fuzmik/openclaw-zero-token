@@ -16,13 +16,11 @@ import { resolveMarkdownTableMode } from "openclaw/plugin-sdk/config-runtime";
 import {
   loadSessionStore,
   resolveSessionStoreEntry,
-  resolveStorePath,
 } from "openclaw/plugin-sdk/config-runtime";
 import type {
   OpenClawConfig,
   ReplyToMode,
   TelegramAccountConfig,
-  TelegramDirectConfig,
 } from "openclaw/plugin-sdk/config-runtime";
 import { getAgentScopedMediaLocalRoots } from "openclaw/plugin-sdk/media-runtime";
 import { clearHistoryEntriesIfEnabled } from "openclaw/plugin-sdk/reply-history";
@@ -620,7 +618,7 @@ export const dispatchTelegramMessage = async ({
           const split = splitTextIntoLaneSegments(payload.text);
           const segments = split.segments;
           const reply = resolveSendableOutboundReplyParts(payload);
-          const hasMedia = reply.hasMedia;
+          const _hasMedia = reply.hasMedia;
 
           const flushBufferedFinalAnswer = async () => {
             const buffered = reasoningStepState.takeBufferedFinalAnswer();

@@ -181,7 +181,7 @@ export async function resolveAuthorizedMessageText(params: {
 
 // Helper to recursively extract text from inline content
 function renderInlineItem(
-  item: any,
+  item: unknown,
   options?: {
     linkMode?: "content-or-href" | "href";
     allowBreak?: boolean;
@@ -198,7 +198,7 @@ function renderInlineItem(
     return item.ship;
   }
   if ("sect" in item) {
-    return `@${item.sect || "all"}`;
+    return `@${(typeof item.sect === "string" ? item.sect : String(item.sect)) || "all"}`;
   }
   if (options?.allowBreak && item.break !== undefined) {
     return "\n";
@@ -227,8 +227,8 @@ function renderInlineItem(
   return "";
 }
 
-function extractInlineText(items: any[]): string {
-  return items.map((item: any) => renderInlineItem(item)).join("");
+function extractInlineText(items: unknown[]): string {
+  return items.map((item: unknown) => renderInlineItem(item)).join("");
 }
 
 export function extractMessageText(content: unknown): string {
@@ -237,11 +237,11 @@ export function extractMessageText(content: unknown): string {
   }
 
   return content
-    .map((verse: any) => {
+    .map((verse: unknown) => {
       // Handle inline content (text, ships, links, etc.)
       if (verse.inline && Array.isArray(verse.inline)) {
         return verse.inline
-          .map((item: any) =>
+          .map((item: unknown) =>
             renderInlineItem(item, {
               linkMode: "href",
               allowBreak: true,
@@ -272,7 +272,7 @@ export function extractMessageText(content: unknown): string {
         if (block.header && typeof block.header === "object") {
           const text =
             block.header.content
-              ?.map((item: any) => (typeof item === "string" ? item : ""))
+              ?.map((item: unknown) => (typeof item === "string" ? item : ""))
               .join("") || "";
           return `\n## ${text}\n`;
         }

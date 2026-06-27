@@ -25,7 +25,7 @@ import {
 import { resolveNextcloudTalkRoomKind } from "./room-info.js";
 import { getNextcloudTalkRuntime } from "./runtime.js";
 import { sendMessageNextcloudTalk } from "./send.js";
-import type { CoreConfig, GroupPolicy, NextcloudTalkInboundMessage } from "./types.js";
+import type { CoreConfig, NextcloudTalkInboundMessage } from "./types.js";
 
 const CHANNEL_ID = "nextcloud-talk" as const;
 

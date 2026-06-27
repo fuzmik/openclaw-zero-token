@@ -8,7 +8,6 @@ import {
 import { logInboundDrop } from "openclaw/plugin-sdk/channel-inbound";
 import { recordChannelActivity } from "openclaw/plugin-sdk/channel-runtime";
 import { loadConfig } from "openclaw/plugin-sdk/config-runtime";
-import type { TelegramDirectConfig, TelegramGroupConfig } from "openclaw/plugin-sdk/config-runtime";
 import { ensureConfiguredBindingRouteReady } from "openclaw/plugin-sdk/conversation-runtime";
 import { deriveLastRoutePolicy } from "openclaw/plugin-sdk/routing";
 import { DEFAULT_ACCOUNT_ID, resolveThreadSessionKeys } from "openclaw/plugin-sdk/routing";
@@ -75,7 +74,7 @@ export type TelegramMessageContext = {
   ackReactionPromise: Promise<boolean> | null;
   reactionApi: TelegramReactionApi | null;
   removeAckAfterReply: boolean;
-  statusReactionController: StatusReactionController | null;
+  statusReactionController: StatusReactionController;
   accountId: string;
 };
 export const buildTelegramMessageContext = async ({
@@ -387,7 +386,7 @@ export const buildTelegramMessageContext = async ({
     resolvedStatusReactionEmojis,
   );
   let allowedStatusReactionEmojisPromise: Promise<Set<TelegramReactionEmoji> | null> | null = null;
-  const statusReactionController: StatusReactionController | null =
+  const statusReactionController: StatusReactionController =
     statusReactionsEnabled && msg.message_id
       ? createStatusReactionController({
           enabled: true,
