@@ -49,7 +49,7 @@ function createMockRequest(
   const req = new IncomingMessage(socket);
   req.method = method;
   req.url = url;
-  req.headers = { host: "localhost:3000", ...(opts?.headers ?? {}) };
+  req.headers = { host: "localhost:3000", ...opts?.headers };
 
   if (body) {
     const bodyStr = JSON.stringify(body);

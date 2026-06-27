@@ -48,10 +48,10 @@ export function extractMSTeamsQuoteInfo(
                 "",
             )
           : "";
-    if (!content) continue;
+    if (!content) {continue;}
 
     // Look for the Skype Reply schema blockquote.
-    if (!content.includes("http://schema.skype.com/Reply")) continue;
+    if (!content.includes("http://schema.skype.com/Reply")) {continue;}
 
     // Extract sender from <strong itemprop="mri">.
     const senderMatch = /<strong[^>]*itemprop=["']mri["'][^>]*>(.*?)<\/strong>/i.exec(content);

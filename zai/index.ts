@@ -43,7 +43,7 @@ function resolveGlm5ForwardCompatModel(
   const template = ctx.modelRegistry.find(
     PROVIDER_ID,
     GLM5_TEMPLATE_MODEL_ID,
-  ) as ProviderRuntimeModel | null;
+  );
   if (template) {
     return normalizeModelCompat({
       ...template,

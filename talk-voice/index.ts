@@ -199,9 +199,9 @@ export default definePluginEntry({
               ...cfg.talk,
               provider: providerId,
               providers: {
-                ...(cfg.talk?.providers ?? {}),
+                ...cfg.talk?.providers,
                 [providerId]: {
-                  ...(cfg.talk?.providers?.[providerId] ?? {}),
+                  ...cfg.talk?.providers?.[providerId],
                   voiceId: chosen.id,
                 },
               },

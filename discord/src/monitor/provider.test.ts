@@ -135,7 +135,7 @@ describe("monitorDiscordProvider", () => {
     if (!reconcileParams?.healthProbe) {
       throw new Error("healthProbe was not wired into ACP startup reconciliation");
     }
-    return reconcileParams.healthProbe as NonNullable<ReconcileStartupParams["healthProbe"]>;
+    return reconcileParams.healthProbe;
   };
 
   beforeAll(async () => {

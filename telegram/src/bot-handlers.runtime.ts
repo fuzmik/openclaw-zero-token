@@ -806,7 +806,7 @@ export const registerTelegramHandlers = ({
       // for reactions, we cannot determine if the reaction came from a topic, so block all
       // reactions if requireTopic is enabled for this DM.
       if (!isGroup) {
-        const requireTopic = (eventAuthContext.groupConfig as TelegramDirectConfig | undefined)
+        const requireTopic = (eventAuthContext.groupConfig)
           ?.requireTopic;
         if (requireTopic === true) {
           logVerbose(

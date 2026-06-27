@@ -220,7 +220,7 @@ export class KimiWebClientBrowser {
             Accept: "*/*",
             Origin: baseUrl,
             Referer: `${baseUrl}/`,
-            "X-Language": "zh-CN",
+            "X-Language": "en-US",
             "X-Msh-Platform": "web",
             Authorization: `Bearer ${kimiAuthToken}`,
           },

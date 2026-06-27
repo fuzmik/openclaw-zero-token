@@ -565,7 +565,7 @@ export async function monitorTlonProvider(opts: MonitorTlonOpts = {}): Promise<v
               metadata?: { model?: string };
               model?: string;
             };
-            const extRoute = route as typeof route & { model?: string };
+            const extRoute = route;
             const defaultModel = cfg.agents?.defaults?.model;
             const modelInfo =
               extPayload.metadata?.model ||
@@ -616,7 +616,7 @@ export async function monitorTlonProvider(opts: MonitorTlonOpts = {}): Promise<v
   const _watchedDMs = new Set<string>();
 
   const refreshWatchedChannels = async (): Promise<number> => {
-    const discoveredChannels = await fetchAllChannels(api!, runtime);
+    const discoveredChannels = await fetchAllChannels(api, runtime);
     let newCount = 0;
     for (const channelNest of discoveredChannels) {
       if (!watchedChannels.has(channelNest)) {
@@ -628,15 +628,15 @@ export async function monitorTlonProvider(opts: MonitorTlonOpts = {}): Promise<v
   };
 
   const { resolveAllCites } = createTlonCitationResolver({
-    api: { scry: (path) => api!.scry(path) },
+    api: { scry: (path) => api.scry(path) },
     runtime,
   });
 
   const { queueApprovalRequest, handleApprovalResponse, handleAdminCommand } =
     createTlonApprovalRuntime({
       api: {
-        poke: (payload) => api!.poke(payload),
-        scry: (path) => api!.scry(path),
+        poke: (payload) => api.poke(payload),
+        scry: (path) => api.scry(path),
       },
       runtime,
       botShipName,

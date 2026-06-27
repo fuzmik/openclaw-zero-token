@@ -9,7 +9,7 @@ import {
 vi.mock("./runtime-api.js", async () => {
   const actual = await vi.importActual<typeof import("./runtime-api.js")>("./runtime-api.js");
   const normalizeWhatsAppTarget = (value: string) => {
-    if (value === "invalid-target") return null;
+    if (value === "invalid-target") {return null;}
     // Simulate E.164 normalization: strip leading + and whatsapp: prefix.
     const stripped = value.replace(/^whatsapp:/i, "").replace(/^\+/, "");
     return stripped.includes("@g.us") ? stripped : `${stripped}@s.whatsapp.net`;

@@ -227,14 +227,14 @@ export function createSynologyChatPlugin(): SynologyChatPlugin {
       messaging: {
         normalizeTarget: (target: string) => {
           const trimmed = target.trim();
-          if (!trimmed) return undefined;
+          if (!trimmed) {return undefined;}
           // Strip common prefixes
           return trimmed.replace(/^synology[-_]?chat:/i, "").trim();
         },
         targetResolver: {
           looksLikeId: (id: string) => {
             const trimmed = id?.trim();
-            if (!trimmed) return false;
+            if (!trimmed) {return false;}
             // Synology Chat user IDs are numeric
             return /^\d+$/.test(trimmed) || /^synology[-_]?chat:/i.test(trimmed);
           },
@@ -303,7 +303,7 @@ export function createSynologyChatPlugin(): SynologyChatPlugin {
         normalizeAllowEntry: (entry: string) => entry.toLowerCase().trim(),
         notify: async ({ cfg, id, message }) => {
           const account = resolveAccount(cfg);
-          if (!account.incomingUrl) return;
+          if (!account.incomingUrl) {return;}
           await sendMessage(account.incomingUrl, message, id, account.allowInsecureSsl);
         },
       },

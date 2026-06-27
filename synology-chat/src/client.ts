@@ -103,7 +103,7 @@ export async function sendMessage(
     try {
       const ok = await doPost(incomingUrl, body, allowInsecureSsl);
       lastSendTime = Date.now();
-      if (ok) return true;
+      if (ok) {return true;}
     } catch {
       // will retry
     }
@@ -221,11 +221,11 @@ export async function resolveLegacyWebhookNameToChatUserId(params: {
 
   // Match by nickname first (webhook "username" field = Chat "nickname")
   const byNickname = users.find((u) => u.nickname.toLowerCase() === lower);
-  if (byNickname) return byNickname.user_id;
+  if (byNickname) {return byNickname.user_id;}
 
   // Then by username
   const byUsername = users.find((u) => u.username.toLowerCase() === lower);
-  if (byUsername) return byUsername.user_id;
+  if (byUsername) {return byUsername.user_id;}
 
   return undefined;
 }

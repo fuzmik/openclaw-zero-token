@@ -28,7 +28,7 @@ import { ButtonStyle, MessageFlags, TextInputStyle } from "discord-api-types/v10
 
 // Some test-only module graphs partially mock `@buape/carbon` and can drop `Modal`.
 // Keep dynamic form definitions loadable instead of crashing unrelated suites.
-const ModalBase: typeof Modal = (Modal ?? class {}) as typeof Modal;
+const ModalBase: typeof Modal = (Modal ?? class {});
 
 export const DISCORD_COMPONENT_CUSTOM_ID_KEY = "occomp";
 export const DISCORD_MODAL_CUSTOM_ID_KEY = "ocmodal";

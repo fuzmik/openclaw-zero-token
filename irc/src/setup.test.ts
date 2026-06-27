@@ -342,7 +342,7 @@ describe("irc setup", () => {
       cfg,
       prompter,
       accountId: "work",
-    })) as CoreConfig;
+    }));
 
     expect(updated.channels?.irc?.allowFrom).toEqual(["alice", "bob!ident@example.org"]);
     expect(updated.channels?.irc?.accounts?.work?.allowFrom).toBeUndefined();

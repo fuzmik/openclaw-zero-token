@@ -656,7 +656,7 @@ export function createBraveWebSearchProvider(): WebSearchProviderPlugin {
           "brave",
           resolveProviderWebSearchPluginConfig(ctx.config, "brave"),
           { mirrorApiKeyToTopLevel: true },
-        ) as SearchConfigRecord | undefined,
+        ),
       ),
   };
 }

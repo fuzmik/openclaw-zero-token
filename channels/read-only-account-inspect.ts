@@ -26,8 +26,8 @@ function loadTelegramInspectModule() {
 
 export type ReadOnlyInspectedAccount =
   | Awaited<ReturnType<DiscordInspectModule["inspectDiscordAccount"]>>
-  | Awaited<ReturnType<SlackInspectModule["inspectSlackAccount"]>>
-  | Awaited<ReturnType<TelegramInspectModule["inspectTelegramAccount"]>>;
+   
+   ;
 
 export async function inspectReadOnlyChannelAccount(params: {
   channelId: ChannelId;

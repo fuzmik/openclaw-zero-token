@@ -3,13 +3,13 @@
 # 兼容 macOS / Linux (含 Deepin) / Windows (Git Bash / WSL)
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-STATE_DIR="$SCRIPT_DIR/.openclaw-upstream-state"
+STATE_DIR="$HOME/.openclaw-zero"
 CONFIG_FILE="$STATE_DIR/openclaw.json"
 PID_FILE="$SCRIPT_DIR/.gateway.pid"
-PORT=3001
+PORT=3200
 
 # 日志文件名（区分不同实例）
-LOG_PREFIX="openclaw-upstream"
+LOG_PREFIX="openclaw-zero"
 
 # ─── 环境检测 ────────────────────────────────────────────────
 detect_os() {
@@ -72,15 +72,15 @@ open_browser() {
 # 临时日志路径（Windows 不一定有 /tmp）
 tmp_log() {
   if [ -d /tmp ]; then
-    echo "/tmp/openclaw-upstream-gateway.log"
+    echo "/tmp/openclaw-zero-gateway.log"
   else
-    echo "$SCRIPT_DIR/logs/openclaw-upstream-gateway.log"
+    echo "$SCRIPT_DIR/logs/openclaw-zero-gateway.log"
   fi
 }
 
 OS=$(detect_os)
 NODE=$(detect_node)
-LOG_FILE="$SCRIPT_DIR/logs/openclaw-upstream.log"
+LOG_FILE="$SCRIPT_DIR/logs/openclaw-zero.log"
 TMP_LOG=$(tmp_log)
 
 if [ -z "$NODE" ]; then
@@ -133,6 +133,19 @@ stop_gateway() {
 }
 
 start_gateway() {
+  # ─── 加载 .env ────────────────────────────────────────
+  if [ -f "$STATE_DIR/.env" ]; then
+    set -a
+    . "$STATE_DIR/.env"
+    set +a
+    echo "已加载环境变量: $STATE_DIR/.env"
+  elif [ -f "$SCRIPT_DIR/.env" ]; then
+    set -a
+    . "$SCRIPT_DIR/.env"
+    set +a
+    echo "已加载环境变量: $SCRIPT_DIR/.env"
+  fi
+
   export OPENCLAW_CONFIG_PATH="$CONFIG_FILE"
   export OPENCLAW_STATE_DIR="$STATE_DIR"
   export OPENCLAW_GATEWAY_PORT="$PORT"

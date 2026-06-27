@@ -32,7 +32,7 @@ export function resolveCopilotForwardCompatModel(
       const template = ctx.modelRegistry.find(
         PROVIDER_ID,
         templateId,
-      ) as ProviderRuntimeModel | null;
+      );
       if (!template) {
         continue;
       }

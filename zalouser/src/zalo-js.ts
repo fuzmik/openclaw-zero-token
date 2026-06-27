@@ -203,7 +203,7 @@ function normalizeAccountInfoUser(info: AccountInfoResponse): User | null {
     }
     return null;
   }
-  return info as User;
+  return info;
 }
 
 function toInteger(value: unknown, fallback = 0): number {
@@ -617,7 +617,7 @@ async function ensureApi(
   const initPromise = (async () => {
     const stored = readCredentials(profile);
     if (!stored) {
-      throw new Error(`No saved Zalo session for profile \"${profile}\"`);
+      throw new Error(`No saved Zalo session for profile "${profile}"`);
     }
     const zalo = await createZalo({
       logging: false,
@@ -631,7 +631,7 @@ async function ensureApi(
         language: stored.language,
       }),
       timeoutMs,
-      `Timed out restoring Zalo session for profile \"${profile}\"`,
+      `Timed out restoring Zalo session for profile "${profile}"`,
     );
     apiByProfile.set(profile, api);
     touchCredentials(profile);
@@ -776,7 +776,7 @@ function extractGroupMembersFromInfo(
 }
 
 function toInboundMessage(message: Message, ownUserId?: string): ZaloInboundMessage | null {
-  const data = message.data as Record<string, unknown>;
+  const data = message.data;
   const isGroup = message.type === ThreadType.Group;
   const senderId = toNumberId(data.uidFrom);
   const threadId = isGroup
@@ -886,7 +886,7 @@ export async function listZaloFriendsMatching(
       return { friend, exact, includes };
     })
     .filter((entry) => entry.includes)
-    .sort((a, b) => Number(b.exact) - Number(a.exact));
+    .toSorted((a, b) => Number(b.exact) - Number(a.exact));
   return scored.map((entry) => entry.friend);
 }
 
@@ -1502,7 +1502,7 @@ export async function startZaloListener(params: {
   const existing = activeListeners.get(profile);
   if (existing) {
     throw new Error(
-      `Zalo listener already running for profile \"${profile}\" (account \"${existing.accountId}\")`,
+      `Zalo listener already running for profile "${profile}" (account "${existing.accountId}")`,
     );
   }
 

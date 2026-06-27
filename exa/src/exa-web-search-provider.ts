@@ -187,11 +187,9 @@ function parseExaContents(
     if ("maxCharacters" in obj && parsePositiveInteger(obj.maxCharacters) === undefined) {
       return invalidContentsPayload("contents.text.maxCharacters must be a positive integer.");
     }
-    return {
-      ...(parsePositiveInteger(obj.maxCharacters)
+    return (parsePositiveInteger(obj.maxCharacters)
         ? { maxCharacters: parsePositiveInteger(obj.maxCharacters) }
-        : {}),
-    };
+        : {});
   };
 
   const parseHighlights = (
@@ -615,7 +613,7 @@ export function createExaWebSearchProvider(): WebSearchProviderPlugin {
           ctx.searchConfig as SearchConfigRecord | undefined,
           "exa",
           resolveProviderWebSearchPluginConfig(ctx.config, "exa"),
-        ) as SearchConfigRecord | undefined,
+        ),
       ),
   };
 }

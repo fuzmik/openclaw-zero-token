@@ -1206,7 +1206,7 @@ function collectOpenExecSurfacePaths(cfg: OpenClawConfig): string[] {
     return [];
   }
   const hits = new Set<string>();
-  const seen = new WeakSet<object>();
+  const seen = new WeakSet();
   const visit = (value: unknown, scope: string) => {
     const record = asRecord(value);
     if (!record || seen.has(record)) {

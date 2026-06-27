@@ -39,7 +39,7 @@ export function renderSignalMentions(message: string, mentions?: SignalMention[]
       continue;
     }
 
-    const { start, end } = clampBounds(mention.start!, mention.length!, normalized.length);
+    const { start, end } = clampBounds(mention.start, mention.length, normalized.length);
     if (start >= end) {
       continue;
     }

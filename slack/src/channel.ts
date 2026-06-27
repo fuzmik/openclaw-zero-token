@@ -529,7 +529,7 @@ export const slackPlugin: ChannelPlugin<ResolvedSlackAccount, SlackProbe> = crea
         return await slackOutbound.sendPayload!({
           ...ctx,
           deps: {
-            ...(ctx.deps ?? {}),
+            ...ctx.deps,
             slack: async (
               to: Parameters<SlackSendFn>[0],
               text: Parameters<SlackSendFn>[1],

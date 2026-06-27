@@ -84,7 +84,7 @@ function resolveXSearchConfig(cfg?: OpenClawConfig): XSearchConfig {
   if (!xSearch || typeof xSearch !== "object") {
     return undefined;
   }
-  return xSearch as XSearchConfig;
+  return xSearch;
 }
 
 function resolveXSearchEnabled(params: {

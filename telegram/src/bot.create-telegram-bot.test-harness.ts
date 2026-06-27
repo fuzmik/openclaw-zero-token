@@ -298,13 +298,13 @@ vi.doMock("./sent-message-cache.js", () => ({
 // of module evaluation order across different test files.
 const grammySpies = vi.hoisted(() => ({
   useSpy: vi.fn() as MockFn<(arg: unknown) => void>,
-  middlewareUseSpy: vi.fn() as AnyMock,
-  onSpy: vi.fn() as AnyMock,
-  stopSpy: vi.fn() as AnyMock,
-  commandSpy: vi.fn() as AnyMock,
+  middlewareUseSpy: vi.fn(),
+  onSpy: vi.fn(),
+  stopSpy: vi.fn(),
+  commandSpy: vi.fn(),
   botCtorSpy: vi.fn((_: string, __?: { client?: { fetch?: typeof fetch } }) => undefined),
   answerCallbackQuerySpy: vi.fn(async () => undefined) as AnyAsyncMock,
-  sendChatActionSpy: vi.fn() as AnyMock,
+  sendChatActionSpy: vi.fn(),
   editMessageTextSpy: vi.fn(async () => ({ message_id: 88 })) as AnyAsyncMock,
   editMessageReplyMarkupSpy: vi.fn(async () => ({ message_id: 88 })) as AnyAsyncMock,
   sendMessageDraftSpy: vi.fn(async () => true) as AnyAsyncMock,

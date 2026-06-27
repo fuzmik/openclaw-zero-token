@@ -74,7 +74,7 @@ vi.mock("./signature.js", async (importOriginal) => {
 });
 
 vi.mock("openclaw/plugin-sdk/ssrf-runtime", async (importOriginal) => {
-  const original = (await importOriginal()) as Record<string, unknown>;
+  const original = (await importOriginal());
   return {
     ...original,
     fetchWithSsrFGuard: hoisted.mockFetchGuard,
@@ -82,7 +82,7 @@ vi.mock("openclaw/plugin-sdk/ssrf-runtime", async (importOriginal) => {
 });
 
 vi.mock("../../../src/infra/net/fetch-guard.js", async (importOriginal) => {
-  const original = (await importOriginal()) as Record<string, unknown>;
+  const original = (await importOriginal());
   return {
     ...original,
     fetchWithSsrFGuard: hoisted.mockFetchGuard,
@@ -90,7 +90,7 @@ vi.mock("../../../src/infra/net/fetch-guard.js", async (importOriginal) => {
 });
 
 vi.mock("openclaw/plugin-sdk/config-runtime", async (importOriginal) => {
-  const original = (await importOriginal()) as Record<string, unknown>;
+  const original = (await importOriginal());
   return {
     ...original,
     resolveMarkdownTableMode: hoisted.resolveMarkdownTableMode,
@@ -98,7 +98,7 @@ vi.mock("openclaw/plugin-sdk/config-runtime", async (importOriginal) => {
 });
 
 vi.mock("openclaw/plugin-sdk/text-runtime", async (importOriginal) => {
-  const original = (await importOriginal()) as Record<string, unknown>;
+  const original = (await importOriginal());
   return {
     ...original,
     convertMarkdownTables: hoisted.convertMarkdownTables,

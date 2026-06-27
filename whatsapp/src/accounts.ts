@@ -125,7 +125,7 @@ export function resolveWhatsAppAccount(params: {
   const rootCfg = params.cfg.channels?.whatsapp;
   const accountId = params.accountId?.trim() || resolveDefaultWhatsAppAccountId(params.cfg);
   const merged = resolveMergedAccountConfig<WhatsAppAccountConfig>({
-    channelConfig: rootCfg as WhatsAppAccountConfig | undefined,
+    channelConfig: rootCfg,
     accounts: rootCfg?.accounts as Record<string, Partial<WhatsAppAccountConfig>> | undefined,
     accountId,
     omitKeys: ["defaultAccount"],

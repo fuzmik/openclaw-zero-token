@@ -170,7 +170,7 @@ export async function resolveTelegramInboundBody(params: {
   const hasAudio = allMedia.some((media) => media.contentType?.startsWith("audio/"));
   const disableAudioPreflight =
     (topicConfig?.disableAudioPreflight ??
-      (groupConfig as TelegramGroupConfig | undefined)?.disableAudioPreflight) === true;
+      (groupConfig)?.disableAudioPreflight) === true;
 
   let preflightTranscript: string | undefined;
   const needsPreflightTranscription =

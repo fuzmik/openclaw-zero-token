@@ -376,7 +376,7 @@ type ExecApprovalHandlerInternals = {
     { discordMessageId: string; discordChannelId: string; timeoutId: NodeJS.Timeout }
   >;
   requestCache: Map<string, unknown>;
-  handleApprovalRequested: (request: ExecApprovalRequest | PluginApprovalRequest) => Promise<void>;
+  handleApprovalRequested: (request: ExecApprovalRequest  ) => Promise<void>;
   handleApprovalTimeout: (approvalId: string, source?: "channel" | "dm") => Promise<void>;
 };
 

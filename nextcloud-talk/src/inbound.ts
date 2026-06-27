@@ -88,7 +88,7 @@ export async function handleNextcloudTalkInbound(params: {
       providerConfigPresent:
         ((config.channels as Record<string, unknown> | undefined)?.["nextcloud-talk"] ??
           undefined) !== undefined,
-      groupPolicy: account.config.groupPolicy as GroupPolicy | undefined,
+      groupPolicy: account.config.groupPolicy,
       defaultGroupPolicy,
     });
   warnMissingProviderGroupPolicyFallbackOnce({

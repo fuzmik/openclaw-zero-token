@@ -4,7 +4,7 @@
 # 兼容 macOS / Linux (含 Deepin) / Windows (Git Bash / WSL)
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-STATE_DIR="$SCRIPT_DIR/.openclaw-upstream-state"
+STATE_DIR="$HOME/.openclaw-zero"
 CONFIG_FILE="$STATE_DIR/openclaw.json"
 
 # ─── 环境检测 ────────────────────────────────────────────────
@@ -60,9 +60,22 @@ if [ ! -f "$CONFIG_FILE" ]; then
   fi
 fi
 
+# ─── 加载 .env（优先从状态目录） ───────────────────────────────
+if [ -f "$STATE_DIR/.env" ]; then
+  set -a
+  . "$STATE_DIR/.env"
+  set +a
+  echo "已加载环境变量: $STATE_DIR/.env"
+elif [ -f "$SCRIPT_DIR/.env" ]; then
+  set -a
+  . "$SCRIPT_DIR/.env"
+  set +a
+  echo "已加载环境变量: $SCRIPT_DIR/.env"
+fi
+
 export OPENCLAW_CONFIG_PATH="$CONFIG_FILE"
 export OPENCLAW_STATE_DIR="$STATE_DIR"
-export OPENCLAW_GATEWAY_PORT=3001
+export OPENCLAW_GATEWAY_PORT=3200
 
 echo "配置文件: $OPENCLAW_CONFIG_PATH"
 echo "状态目录: $OPENCLAW_STATE_DIR"

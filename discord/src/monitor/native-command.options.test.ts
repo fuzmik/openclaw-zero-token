@@ -43,10 +43,8 @@ function createNativeCommand(
   if (!command) {
     throw new Error(`missing native command: ${name}`);
   }
-  const cfg = (opts?.cfg ?? {}) as ReturnType<typeof loadConfig>;
-  const discordConfig = (opts?.discordConfig ?? {}) as NonNullable<
-    OpenClawConfig["channels"]
-  >["discord"];
+  const cfg = (opts?.cfg ?? {});
+  const discordConfig = (opts?.discordConfig ?? {});
   return createDiscordNativeCommand({
     command,
     cfg,

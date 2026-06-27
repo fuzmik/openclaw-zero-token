@@ -76,7 +76,7 @@ function createDispatchSpy() {
     },
   } as never);
   nativeCommandTesting.setDispatchReplyWithDispatcher(
-    dispatcherModule.dispatchReplyWithDispatcher as typeof import("openclaw/plugin-sdk/reply-runtime").dispatchReplyWithDispatcher,
+    dispatcherModule.dispatchReplyWithDispatcher,
   );
   return dispatchSpy;
 }
@@ -115,7 +115,7 @@ describe("Discord native slash commands with commands.allowFrom", () => {
   beforeEach(() => {
     vi.restoreAllMocks();
     nativeCommandTesting.setDispatchReplyWithDispatcher(
-      dispatcherModule.dispatchReplyWithDispatcher as typeof import("openclaw/plugin-sdk/reply-runtime").dispatchReplyWithDispatcher,
+      dispatcherModule.dispatchReplyWithDispatcher,
     );
   });
 
@@ -232,9 +232,7 @@ describe("Discord native slash commands with commands.allowFrom", () => {
     });
 
     const dispatchCall = vi.mocked(dispatcherModule.dispatchReplyWithDispatcher).mock
-      .calls[0]?.[0] as
-      | Parameters<typeof dispatcherModule.dispatchReplyWithDispatcher>[0]
-      | undefined;
+      .calls[0]?.[0];
     await dispatchCall?.dispatcherOptions.deliver({ text: longReply }, { kind: "final" });
 
     expect(interaction.reply).toHaveBeenCalledWith(expect.objectContaining({ content: longReply }));

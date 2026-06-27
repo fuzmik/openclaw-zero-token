@@ -167,7 +167,7 @@ export class DoubaoWebClient {
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
       Referer: "https://www.doubao.com/chat/",
       Origin: "https://www.doubao.com",
-      "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+      "Accept-Language": "en-US,en;q=0.9",
       "Accept-Encoding": "gzip, deflate, br",
       Connection: "keep-alive",
       "Sec-Fetch-Dest": "empty",

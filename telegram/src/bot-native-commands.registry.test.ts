@@ -32,9 +32,7 @@ async function registerPairMenu(params: {
   setMyCommands: ReturnType<typeof createCommandBot>["setMyCommands"];
   nativeNames?: { telegram?: string; discord?: string };
 }) {
-  registerPairPluginCommand({
-    ...(params.nativeNames ? { nativeNames: params.nativeNames } : {}),
-  });
+  registerPairPluginCommand((params.nativeNames ? { nativeNames: params.nativeNames } : {}));
 
   registerTelegramNativeCommands({
     ...createNativeCommandTestParams({}),

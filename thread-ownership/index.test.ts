@@ -22,7 +22,7 @@ describe("thread-ownership plugin", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    for (const key of Object.keys(hooks)) delete hooks[key];
+    for (const key of Object.keys(hooks)) {delete hooks[key];}
 
     process.env.SLACK_FORWARDER_URL = "http://localhost:8750";
     process.env.SLACK_BOT_USER_ID = "U999";

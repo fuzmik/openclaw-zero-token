@@ -23,7 +23,7 @@ function mergeWhatsAppConfig(
   patch: Partial<NonNullable<NonNullable<OpenClawConfig["channels"]>["whatsapp"]>>,
   options?: { unsetOnUndefined?: string[] },
 ): OpenClawConfig {
-  const base = { ...(cfg.channels?.whatsapp ?? {}) } as Record<string, unknown>;
+  const base = { ...cfg.channels?.whatsapp } as Record<string, unknown>;
   for (const [key, value] of Object.entries(patch)) {
     if (value === undefined) {
       if (options?.unsetOnUndefined?.includes(key)) {

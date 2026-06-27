@@ -97,7 +97,7 @@ export class DeepSeekWebClient {
       "x-client-platform": "web",
       "x-client-version": "1.7.0",
       "x-app-version": "20241129.1",
-      "x-client-locale": "zh_CN",
+      "x-client-locale": "en_US",
       "x-client-timezone-offset": "28800",
     };
   }

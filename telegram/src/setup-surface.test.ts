@@ -43,10 +43,7 @@ function expectPreparedResult(
   ) {
     throw new Error("Expected prepare result with cfg");
   }
-  return prepared as { cfg: OpenClawConfig } & Exclude<
-    Awaited<ReturnType<typeof runPrepare>>,
-    void | undefined
-  >;
+  return prepared;
 }
 
 describe("telegramSetupWizard.prepare", () => {

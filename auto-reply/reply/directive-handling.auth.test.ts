@@ -49,7 +49,7 @@ async function resolveRefOnlyAuthLabel(params: {
   profileId: string;
   profile:
     | (AuthProfileStore["profiles"][string] & { type: "api_key" })
-    | (AuthProfileStore["profiles"][string] & { type: "token" });
+     ;
   mode: "compact" | "verbose";
 }) {
   mockStore.profiles = {

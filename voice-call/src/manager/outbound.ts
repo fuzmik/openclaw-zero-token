@@ -334,7 +334,7 @@ export async function continueCall(
         : 1;
 
     call.metadata = {
-      ...(call.metadata ?? {}),
+      ...call.metadata,
       turnCount,
       lastTurnLatencyMs,
       lastTurnListenWaitMs,

@@ -228,15 +228,15 @@ async function runPerplexitySearchApi(params: {
     query: params.query,
     max_results: params.count,
   };
-  if (params.country) body.country = params.country;
-  if (params.searchDomainFilter?.length) body.search_domain_filter = params.searchDomainFilter;
-  if (params.searchRecencyFilter) body.search_recency_filter = params.searchRecencyFilter;
+  if (params.country) {body.country = params.country;}
+  if (params.searchDomainFilter?.length) {body.search_domain_filter = params.searchDomainFilter;}
+  if (params.searchRecencyFilter) {body.search_recency_filter = params.searchRecencyFilter;}
   if (params.searchLanguageFilter?.length)
-    body.search_language_filter = params.searchLanguageFilter;
-  if (params.searchAfterDate) body.search_after_date = params.searchAfterDate;
-  if (params.searchBeforeDate) body.search_before_date = params.searchBeforeDate;
-  if (params.maxTokens !== undefined) body.max_tokens = params.maxTokens;
-  if (params.maxTokensPerPage !== undefined) body.max_tokens_per_page = params.maxTokensPerPage;
+    {body.search_language_filter = params.searchLanguageFilter;}
+  if (params.searchAfterDate) {body.search_after_date = params.searchAfterDate;}
+  if (params.searchBeforeDate) {body.search_before_date = params.searchBeforeDate;}
+  if (params.maxTokens !== undefined) {body.max_tokens = params.maxTokens;}
+  if (params.maxTokensPerPage !== undefined) {body.max_tokens_per_page = params.maxTokensPerPage;}
 
   return withTrustedWebSearchEndpoint(
     {
@@ -333,8 +333,8 @@ function resolveRuntimeTransport(params: {
       return configuredBaseUrl;
     }
     if (params.keySource === "env") {
-      if (params.fallbackEnvVar === "PERPLEXITY_API_KEY") return PERPLEXITY_DIRECT_BASE_URL;
-      if (params.fallbackEnvVar === "OPENROUTER_API_KEY") return DEFAULT_PERPLEXITY_BASE_URL;
+      if (params.fallbackEnvVar === "PERPLEXITY_API_KEY") {return PERPLEXITY_DIRECT_BASE_URL;}
+      if (params.fallbackEnvVar === "OPENROUTER_API_KEY") {return DEFAULT_PERPLEXITY_BASE_URL;}
     }
     if ((params.keySource === "config" || params.keySource === "secretRef") && params.resolvedKey) {
       return inferPerplexityBaseUrlFromApiKey(params.resolvedKey) === "openrouter"
@@ -622,7 +622,7 @@ function createPerplexityToolDefinition(
               },
               results: await runPerplexitySearchApi({
                 query,
-                apiKey: runtime.apiKey!,
+                apiKey: runtime.apiKey,
                 count: resolveSearchCount(count, DEFAULT_SEARCH_COUNT),
                 timeoutSeconds,
                 country: country ?? undefined,
@@ -677,7 +677,7 @@ export function createPerplexityWebSearchProvider(): WebSearchProviderPlugin {
           ctx.searchConfig as SearchConfigRecord | undefined,
           "perplexity",
           resolveProviderWebSearchPluginConfig(ctx.config, "perplexity"),
-        ) as SearchConfigRecord | undefined,
+        ),
         resolvedKey: ctx.resolvedCredential?.value,
         keySource: ctx.resolvedCredential?.source ?? "missing",
         fallbackEnvVar: ctx.resolvedCredential?.fallbackEnvVar,
@@ -689,7 +689,7 @@ export function createPerplexityWebSearchProvider(): WebSearchProviderPlugin {
           ctx.searchConfig as SearchConfigRecord | undefined,
           "perplexity",
           resolveProviderWebSearchPluginConfig(ctx.config, "perplexity"),
-        ) as SearchConfigRecord | undefined,
+        ),
         ctx.runtimeMetadata?.perplexityTransport as PerplexityTransport | undefined,
       ),
   };

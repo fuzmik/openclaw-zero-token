@@ -72,11 +72,11 @@ function patchSynologyChatAccountConfig(params: {
     };
   }
 
-  const nextAccounts = { ...(channelConfig.accounts ?? {}) } as Record<
+  const nextAccounts = { ...channelConfig.accounts } as Record<
     string,
     Record<string, unknown>
   >;
-  const nextAccountConfig = { ...(nextAccounts[params.accountId] ?? {}) };
+  const nextAccountConfig = { ...nextAccounts[params.accountId] };
   for (const field of params.clearFields ?? []) {
     delete nextAccountConfig[field];
   }

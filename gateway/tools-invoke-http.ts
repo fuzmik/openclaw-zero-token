@@ -275,7 +275,7 @@ export async function handleToolsInvokeHttpRequest(
     // oxlint-disable-next-line typescript/no-explicit-any
     tools: allTools as any,
     // oxlint-disable-next-line typescript/no-explicit-any
-    toolMeta: (tool) => getPluginToolMeta(tool as any),
+    toolMeta: (tool) => getPluginToolMeta(tool),
     warn: logWarn,
     steps: [
       ...buildDefaultToolPolicyPipelineSteps({

@@ -144,7 +144,7 @@ function mergeFetchedDiscordMessage(base: Message, fetched: APIMessage): Message
     : undefined;
   const referencedMessage = fetched.referenced_message
     ? ({
-        ...((base as { referencedMessage?: object }).referencedMessage ?? {}),
+        ...(base as { referencedMessage?: object }).referencedMessage,
         ...fetched.referenced_message,
         mentionedUsers: Array.isArray(fetched.referenced_message.mentions)
           ? fetched.referenced_message.mentions.map((mention) => ({
@@ -159,7 +159,7 @@ function mergeFetchedDiscordMessage(base: Message, fetched: APIMessage): Message
       } satisfies Record<string, unknown>)
     : (base as { referencedMessage?: Message }).referencedMessage;
   const rawData = {
-    ...((base as { rawData?: Record<string, unknown> }).rawData ?? {}),
+    ...(base as { rawData?: Record<string, unknown> }).rawData,
     message_snapshots:
       fetched.message_snapshots ??
       (base as { rawData?: { message_snapshots?: unknown } }).rawData?.message_snapshots,

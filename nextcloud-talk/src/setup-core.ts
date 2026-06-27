@@ -75,7 +75,7 @@ export function clearNextcloudTalkAccountFields(
     return {
       ...cfg,
       channels: {
-        ...(cfg.channels ?? {}),
+        ...cfg.channels,
         "nextcloud-talk": nextSection as NextcloudTalkSection,
       },
     } as CoreConfig;
@@ -93,7 +93,7 @@ export function clearNextcloudTalkAccountFields(
   return {
     ...cfg,
     channels: {
-      ...(cfg.channels ?? {}),
+      ...cfg.channels,
       "nextcloud-talk": {
         ...section,
         accounts: {

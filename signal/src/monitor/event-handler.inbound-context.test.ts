@@ -86,7 +86,7 @@ describe("signal createSignalEventHandler inbound context", () => {
     );
 
     expect(capture.ctx).toBeTruthy();
-    expectInboundContextContract(capture.ctx!);
+    expectInboundContextContract(capture.ctx);
     const contextWithBody = capture.ctx!;
     // Sender should appear as prefix in group messages (no redundant [from:] suffix)
     expect(String(contextWithBody.Body ?? "")).toContain("Alice");
