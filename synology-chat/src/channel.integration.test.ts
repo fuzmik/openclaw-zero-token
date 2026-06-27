@@ -1,4 +1,3 @@
-import type { IncomingMessage, ServerResponse } from "node:http";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
   dispatchReplyWithBufferedBlockDispatcher,
@@ -7,7 +6,6 @@ import {
   resolveAgentRouteMock,
 } from "./channel.test-mocks.js";
 import { makeFormBody, makeReq, makeRes } from "./test-http-utils.js";
-
 
 let createSynologyChatPlugin: typeof import("./channel.js").createSynologyChatPlugin;
 const freshChannelModulePath: string = "./channel.js?channel-integration-test";
@@ -52,7 +50,9 @@ describe("Synology channel wiring integration", () => {
 
     const firstCall = registerPluginHttpRouteMock.mock.calls[0];
     expect(firstCall).toBeTruthy();
-    if (!firstCall) {throw new Error("Expected registerPluginHttpRoute to be called");}
+    if (!firstCall) {
+      throw new Error("Expected registerPluginHttpRoute to be called");
+    }
     const registered = firstCall[0];
     expect(registered.path).toBe("/webhook/synology-alerts");
     expect(registered.accountId).toBe("alerts");

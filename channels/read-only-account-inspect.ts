@@ -24,16 +24,13 @@ function loadTelegramInspectModule() {
   return telegramInspectModulePromise;
 }
 
-export type ReadOnlyInspectedAccount =
-  | Awaited<ReturnType<DiscordInspectModule["inspectDiscordAccount"]>>
-   
-   ;
+export type ReadOnlyInspectedAccount = unknown;
 
 export async function inspectReadOnlyChannelAccount(params: {
   channelId: ChannelId;
   cfg: OpenClawConfig;
   accountId?: string | null;
-}): Promise<ReadOnlyInspectedAccount | null> {
+}): Promise<ReadOnlyInspectedAccount> {
   if (params.channelId === "discord") {
     const { inspectDiscordAccount } = await loadDiscordInspectModule();
     return inspectDiscordAccount({

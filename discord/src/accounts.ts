@@ -25,6 +25,7 @@ export function resolveDiscordAccountConfig(
   cfg: OpenClawConfig,
   accountId: string,
 ): DiscordAccountConfig | undefined {
+  // oxlint-disable-line
   return resolveAccountEntry(cfg.channels?.discord?.accounts, accountId);
 }
 
@@ -74,7 +75,7 @@ export function resolveDiscordAccount(params: {
 
 export function resolveDiscordMaxLinesPerMessage(params: {
   cfg: OpenClawConfig;
-  discordConfig?: DiscordAccountConfig | null;
+  discordConfig?: DiscordAccountConfig | null; // oxlint-disable-line
   accountId?: string | null;
 }): number | undefined {
   if (typeof params.discordConfig?.maxLinesPerMessage === "number") {

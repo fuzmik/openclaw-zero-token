@@ -47,9 +47,7 @@ const { resolveAuthLabel } = await import("./directive-handling.auth.js");
 async function resolveRefOnlyAuthLabel(params: {
   provider: string;
   profileId: string;
-  profile:
-    | (AuthProfileStore["profiles"][string] & { type: "api_key" })
-     ;
+  profile: { type: "api_key" };
   mode: "compact" | "verbose";
 }) {
   mockStore.profiles = {

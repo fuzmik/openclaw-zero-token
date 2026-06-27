@@ -673,7 +673,16 @@ describe("msteams attachments", () => {
     it("blocks redirects to non-https URLs", async () => {
       const insecureUrl = "http://x/insecure.png";
       const fetchMock = vi.fn(async (input: RequestInfo | URL) => {
-        const url = typeof input === "string" ? input : new URL(input instanceof URL ? input.href : String(input)).href;
+        const url =
+          typeof input === "string"
+            ? input
+            : new URL(
+                input instanceof URL
+                  ? input.href
+                  : input instanceof Request
+                    ? input.url
+                    : String(input),
+              ).href;
         if (url === TEST_URL_IMAGE) {
           return createRedirectResponse(insecureUrl);
         }
@@ -705,7 +714,14 @@ describe("msteams attachments", () => {
       const seen: Array<{ url: string; auth: string }> = [];
       const referenceAttachment = createReferenceAttachment();
       const fetchMock = vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
-        const url = typeof input === "string" ? input : (input instanceof URL ? input.href : String(input));
+        const url =
+          typeof input === "string"
+            ? input
+            : input instanceof URL
+              ? input.href
+              : input instanceof Request
+                ? input.url
+                : String(input);
         const auth = new Headers(init?.headers).get("Authorization") ?? "";
         seen.push({ url, auth });
 
