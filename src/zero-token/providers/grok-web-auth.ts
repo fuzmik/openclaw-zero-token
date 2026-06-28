@@ -22,6 +22,21 @@ export interface GrokWebAuthOptions {
   headless?: boolean;
 }
 
+async function waitForGrokSession(
+  context: { cookies: (urls: string | string[]) => Promise<Array<{ name: string }>> },
+  timeout = 300000,
+): Promise<void> {
+  const start = Date.now();
+  while (Date.now() - start < timeout) {
+    const cookies = await context.cookies("https://grok.com");
+    if (cookies.some((c) => c.name === "sso")) {
+      return;
+    }
+    await new Promise((r) => setTimeout(r, 2000));
+  }
+  throw new Error("Timed out waiting for Grok SSO cookie");
+}
+
 export async function loginGrokWeb(options: GrokWebAuthOptions = {}): Promise<GrokWebAuthResult> {
   const { onProgress = console.log, headless = false } = options;
 
@@ -84,12 +99,7 @@ export async function loginGrokWeb(options: GrokWebAuthOptions = {}): Promise<Gr
     onProgress("Please login to Grok in the opened browser window...");
     onProgress("Waiting for authentication...");
 
-    await page.waitForFunction(
-      () => {
-        return document.cookie.includes("sso") || document.cookie.includes("_ga");
-      },
-      { timeout: 300000 },
-    );
+    await waitForGrokSession(context);
 
     onProgress("Login detected, capturing cookies...");
     const cookies = await context.cookies("https://grok.com");
