@@ -322,9 +322,23 @@ export class DeepSeekWebClient {
       throw new Error(`Chat completion failed: ${res.status} ${errorText}`);
     }
 
+    const contentType = res.headers.get("content-type") || "";
     console.log(
-      `[DeepSeekWebClient] Chat completion response OK (status: ${res.status}). Content-Type: ${res.headers.get("content-type")}`,
+      `[DeepSeekWebClient] Chat completion response OK (status: ${res.status}). Content-Type: ${contentType}`,
     );
+
+    // DeepSeek sometimes returns application/json instead of text/event-stream,
+    // e.g. when the session is invalid/expired or the request format has changed.
+    // Parse the JSON to surface the actual response/error instead of silently
+    // producing empty output when the SSE reader finds no data: lines.
+    if (contentType.includes("application/json") || contentType.includes("text/json")) {
+      const jsonBody = await res.text();
+      console.log(`[DeepSeekWebClient] JSON response body: ${jsonBody.slice(0, 500)}`);
+      throw new Error(
+        `DeepSeek API returned JSON instead of SSE stream: ${jsonBody.slice(0, 300)}`,
+      );
+    }
+
     return res.body;
   }
 

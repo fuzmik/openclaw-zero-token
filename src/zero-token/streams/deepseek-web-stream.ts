@@ -52,7 +52,14 @@ export function createDeepseekWebStreamFn(cookieOrJson: string): StreamFn {
       try {
         await client.init();
 
-        const sessionKey = (context as unknown as { sessionId?: string }).sessionId || "default";
+        // Use the agent's real sessionId when available; otherwise generate a unique
+        // one-off key per run so subagents (which all share sessionId="default")
+        // don't accidentally reuse the main session's stale DeepSeek session.
+        const rawSessionId = (context as unknown as { sessionId?: string }).sessionId || "";
+        const sessionKey =
+          rawSessionId && rawSessionId !== "default"
+            ? rawSessionId
+            : `_subagent_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
         let dsSessionId = sessionMap.get(sessionKey);
         let parentId = parentMessageMap.get(sessionKey);
 

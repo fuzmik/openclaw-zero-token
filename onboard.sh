@@ -4,7 +4,7 @@
 # 兼容 macOS / Linux (含 Deepin) / Windows (Git Bash / WSL)
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-STATE_DIR="$HOME/.openclaw-zero"
+STATE_DIR="$HOME/.openclaw"
 CONFIG_FILE="$STATE_DIR/openclaw.json"
 
 # ─── 环境检测 ────────────────────────────────────────────────
